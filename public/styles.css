@@ -1,0 +1,291 @@
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+*:not(dialog) {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+/* RESET END */
+
+/* DASH CLASSES */
+/* Dashboard Layout */
+.dash-container {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #f8fafc;
+}
+
+/* Sidebar Navigation */
+.dash-sidebar {
+  background-color: #1e293b;
+  color: white;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #3b82f6;
+}
+
+.nav-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-nav-link {
+  color: #cbd5e1;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  transition: background 0.2s;
+}
+
+.dash-nav-link:hover {
+  background-color: #334155;
+  color: white;
+}
+
+/* Main Content Area */
+.dash-main {
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* File/Folder Lists */
+.dash-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #475569;
+  margin: 1.5rem 0 1rem;
+}
+
+.dash-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.dash-item {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.dash-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.dash-item-link {
+  text-decoration: none;
+  color: #1e293b;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+/* Icons/Badges */
+.icon { font-size: 1.25rem; }
+.file-meta {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-left: auto;
+}
+
+/* Reusing Button Style but with a dash prefix for consistency */
+.dash-btn {
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.875rem;
+  background-color: #2563eb;
+  color: white;
+}
+
+.dash-btn-outline {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+}
+
+/* AUTH CLASSES */
+/* Layout Wrapper - Keep body clean or use a container class */
+.auth-page {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Form Container */
+.auth-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-title {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #1e293b;
+  text-align: center;
+}
+
+.auth-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #475569;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.auth-btn:hover {
+  background-color: #1d4ed8;
+}
+
+/* Errors */
+.error-list {
+  padding-left: 0;
+  list-style: none;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 1rem;
+}
+
+.error-item {
+  font-size: 0.875rem;
+  background-color: #fef2f2;
+  color: #b91c1c;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  border: 1px solid #fee2e2;
+}
+
+/* Footer Link */
+.auth-footer {
+  margin-top: 1.5rem;
+}
+
+/* UTILITY CLASSES */
+/* A utility class for centering text */
+.text-center {
+  text-align: center;
+}
+
+/* A utility for spacing */
+.mb-1 {
+  margin-bottom: 1rem;
+}
+
+/* To make a button look like a block element */
+.btn-block {
+  display: block;
+  text-decoration: none;
+}
+
+/* To make an element light gray */
+.light-gray {
+  color: #64748b;
+}
