@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+<body>
+  <% if (locals.currentUser) { %>
+    <div class="dash-container">
+      <!-- Sidebar -->
+      <aside class="dash-sidebar">
+        <div class="dash-logo">Deep Thought Vault</div>
+        <nav class="nav-box">
+          <a href="/" class="dash-nav-link">🏠 Dashboard</a>
+          <a href="/logout" class="dash-nav-link">🚪 Logout</a>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="dash-main">
+        <header class="dash-header">
+          <h1>Welcome, <%= currentUser.name %></h1>
+          <div class="dash-actions">
+            <a href="/folders/new" class="dash-btn dash-btn-outline">New Folder</a>
+            <a href="/files/upload" class="dash-btn">Upload File</a>
+          </div>
+        </header>
+
+        <h3 class="dash-section-title">Folders</h3>
+        <ul class="dash-list">
+          <% folders.forEach(folder => { %>
+            <li class="dash-item">
+              <a href="/folders/<%= folder.id %>" class="dash-item-link">
+                <span class="icon">📁</span> <%= folder.name %>
+              </a>
+            </li>
+          <% }) %>
+        </ul>
+
+        <h3 class="dash-section-title">Recent Files</h3>
+        <ul class="dash-list">
+          <% files.forEach(file => { %>
+            <li class="dash-item">
+              <a href="/files/<%= file.id %>" class="dash-item-link">
+                <span class="icon">📄</span> <%= file.name %>
+                <span class="file-meta"><%= file.size %>kb</span>
+              </a>
+            </li>
+          <% }) %>
+        </ul>
+      </main>
+    </div>
+  <% } else { %>
+    <!-- Reusing Auth Page styles for the Hero/Logged-out state -->
+    <div class="auth-page">
+      <div class="auth-card text-center">
+        <h1 class="auth-title">Deep Thought Vault</h1>
+        <p class="light-gray mb-1">Secure cloud storage for your project files.</p>
+        <a href="/sign-up" class="auth-btn btn-block">Get Started</a>
+        <p class="auth-footer light-gray">Already a member? <a href="/login">Log in</a></p>
+      </div>
+    </div>
+  <% } %>
+<%- include('partials/footer') %>
+

@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+<body class="auth-page">
+  <div class="auth-card">
+    <h1 class="auth-title">Welcome Back</h1>
+
+    <!-- Passport looks for 'email' and 'password' based on your LocalStrategy -->
+    <form action="/login" method="POST">
+      <label class="auth-label" for="email">Email</label>
+      <input class="auth-input" type="email" id="email" name="email" required autofocus>
+
+      <label class="auth-label" for="password">Password</label>
+      <input class="auth-input" type="password" id="password" name="password" required>
+
+      <button class="auth-btn" type="submit">Log In</button>
+    </form>
+
+    <!-- Handle Passport failure messages if you use flash or custom errors -->
+    <% if (locals.message) { %>
+      <ul class="error-list">
+        <li class="error-item"><%= message %></li>
+      </ul>
+    <% } %>
+
+    <p class="auth-footer light-gray">New here? <a href="/sign-up">Create an account</a></p>
+  </div>
+<%- include('partials/footer') %>
+
