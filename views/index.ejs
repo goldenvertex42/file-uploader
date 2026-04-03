@@ -16,13 +16,26 @@
         <header class="dash-header">
           <h1>Welcome, <%= currentUser.name %></h1>
           <div class="dash-actions">
-            <a href="/folders/new" class="dash-btn dash-btn-outline">New Folder</a>
+            <button id="btn-new-folder" class="dash-btn dash-btn-outline">New Folder</button>
             <a href="/files/upload" class="dash-btn">Upload File</a>
           </div>
         </header>
 
         <h3 class="dash-section-title">Folders</h3>
         <ul class="dash-list">
+          <li id="new-folder-item" class="dash-item hidden">
+            <form action="/folders/new" method="POST">
+              <span class="icon">📁</span>
+              <input 
+                type="text" 
+                name="name" 
+                id="new-folder-input" 
+                class="dash-input-inline" 
+                value="New Folder"
+                autocomplete="off"
+              >
+            </form>
+          </li>
           <% folders.forEach(folder => { %>
             <li class="dash-item">
               <a href="/folders/<%= folder.id %>" class="dash-item-link">
@@ -56,5 +69,6 @@
       </div>
     </div>
   <% } %>
+  <script src="/js/dashboard.js"></script>
 <%- include('partials/footer') %>
 

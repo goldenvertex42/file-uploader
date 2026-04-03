@@ -10,10 +10,30 @@ async function createUser(email, name, password) {
   });
 }
 
+async function createFolder(name, userId) {
+  return await prisma.folder.create({
+    data: {
+      name: name,
+      userId: userId,
+    },
+  });
+}
+
 async function getUserFolders(userId) {
-    return await prisma.folder.findMany({
-      where: { userId }
-    });
+  return await prisma.folder.findMany({
+    where: { userId },
+    orderBy: { name: 'asc' }
+  });
+}
+
+async function getUserRootFiles(userId) {
+  return await prisma.file.findMany({
+    where: { 
+      userId: userId,
+      folderId: null // Only files NOT in a folder
+    },
+    orderBy: { createdAt: 'desc' }
+  });
 }
 
 async function getUserByEmail(email) {
@@ -30,7 +50,9 @@ async function getUserById(id) {
 
 module.exports = {
   createUser,
+  createFolder,
   getUserFolders,
+  getUserRootFiles,
   getUserByEmail,
   getUserById
 }
