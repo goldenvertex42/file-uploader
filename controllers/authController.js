@@ -28,12 +28,27 @@ const validateUserLogin = [
   body('password').notEmpty().withMessage('Password cannot be blank')
 ];
 
-async function indexGet(req, res) {
-  res.render("index", { 
-    title: "File Uploader - Dashboard",
-    folders: [], 
-    files: [] 
-  });
+async function indexGet(req, res, next) {
+  try {
+    // If not logged in, render the landing page state
+    if (!req.isAuthenticated()) {
+      return res.render("index", { folders: [], files: [] });
+    }
+
+    // Fetch actual data for the logged-in user
+    const [folders, files] = await Promise.all([
+      db.getUserFolders(req.user.id),
+      db.getUserRootFiles(req.user.id)
+    ]);
+    console.log("Folders found for user:", folders); 
+    res.render("index", { 
+      title: "Dashboard",
+      folders, 
+      files 
+    });
+  } catch (err) {
+    next(err);
+  }
 }
 
 async function signUpGet(req, res) {
