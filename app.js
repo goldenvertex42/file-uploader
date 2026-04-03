@@ -8,6 +8,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 const db = require('./db/queries');
 const authRouter = require("./routes/authRouter.js");
+const fileRouter = require("./routes/fileRouter.js");
+const folderRouter = require("./routes/folderRouter.js");
 
 
 
@@ -79,6 +81,8 @@ app.use((req, res, next) => {
 });
 // ROUTES GO HERE
 app.use('/', authRouter);
+app.use('/files', fileRouter);
+app.use('/folders', folderRouter);
 
 app.listen(3000, (error) => {
   if (error) {
