@@ -149,6 +149,27 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
 }
 
+.dash-item form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* Matches the gap in your .dash-item-link */
+}
+
+.dash-item.active-form {
+  border: 2px solid #3b82f6; /* Highlight the active input */
+  background-color: #eff6ff;
+}
+
+.dash-input-inline {
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 1rem;
+  width: 100%;
+  outline: none;
+}
+
 /* Icons/Badges */
 .icon { font-size: 1.25rem; }
 .file-meta {
@@ -166,6 +187,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.875rem;
   background-color: #2563eb;
   color: white;
+  cursor: pointer;
 }
 
 .dash-btn-outline {
@@ -288,4 +310,9 @@ h1, h2, h3, h4, h5, h6 {
 /* To make an element light gray */
 .light-gray {
   color: #64748b;
+}
+
+/* To make an element hidden */
+.hidden {
+  display: none;
 }
