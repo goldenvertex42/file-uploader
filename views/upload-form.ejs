@@ -1,0 +1,23 @@
+<body class="auth-page">
+  <div class="auth-card">
+    <h1 class="auth-title">Upload File</h1>
+
+    <form action="/files/upload" method="POST" enctype="multipart/form-data">
+      <label class="auth-label" for="file">Select File</label>
+      <input class="auth-input" type="file" id="file" name="file" required>
+
+      <!-- Optional: Folder selection -->
+      <label class="auth-label" for="folderId">Folder (Optional)</label>
+      <select class="auth-input" name="folderId">
+        <option value="">Root Directory</option>
+        <% folders.forEach(folder => { %>
+          <option value="<%= folder.id %>"><%= folder.name %></option>
+        <% }) %>
+      </select>
+
+      <button class="auth-btn" type="submit">Upload to Cloud</button>
+    </form>
+
+    <p class="auth-footer"><a href="/">Back to Dashboard</a></p>
+  </div>
+</body>
