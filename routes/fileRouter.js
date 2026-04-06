@@ -5,10 +5,9 @@ const upload = multer({ dest: 'uploads/' }); // Temporary local storage before c
 const fileController = require("../controllers/fileController");
 const { isAuth } = require("../middleware/authMiddleware");
 
-// GET the form
 fileRouter.get("/upload", isAuth, fileController.uploadGet);
-
-// POST the file
 fileRouter.post("/upload", isAuth, upload.single('file'), fileController.uploadPost);
+fileRouter.get("/:id", isAuth, fileController.fileDetailGet);
+fileRouter.get("/:id/download", isAuth, fileController.fileDownloadGet);
 
 module.exports = fileRouter;

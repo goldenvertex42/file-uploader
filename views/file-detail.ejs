@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+<div class="dash-container">
+  <%- include('partials/navbar') %>
+  
+  <main class="dash-main">
+    <div class="auth-card">
+      <h1 class="auth-title">📄 File Details</h1>
+      
+      <div class="file-info">
+        <p><strong>Name:</strong> <%= file.name %></p>
+        <p><strong>Size:</strong> <%= (file.size / 1024).toFixed(2) %> KB</p>
+        <p><strong>Uploaded:</strong> <%= file.createdAt.toLocaleString() %></p>
+      </div>
+
+      <div class="dash-actions" style="margin-top: 2rem;">
+        <!-- Download Button -->
+        <a href="/files/<%= file.id %>/download" class="dash-btn">Download File</a>
+        <a href="/" class="dash-btn dash-btn-outline">Back</a>
+      </div>
+    </div>
+  </main>
+</div>
+<%- include('partials/footer') %>
