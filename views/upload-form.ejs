@@ -1,3 +1,4 @@
+<%- include('partials/header') %>
 <body class="auth-page">
   <div class="auth-card">
     <h1 class="auth-title">Upload File</h1>
@@ -11,7 +12,12 @@
       <select class="auth-input" name="folderId">
         <option value="">Root Directory</option>
         <% folders.forEach(folder => { %>
-          <option value="<%= folder.id %>"><%= folder.name %></option>
+          <option 
+            value="<%= folder.id %>" 
+            <%= (locals.selectedFolderId == folder.id) ? 'selected' : '' %>
+          >
+            <%= folder.name %>
+          </option>
         <% }) %>
       </select>
 
@@ -21,3 +27,5 @@
     <p class="auth-footer"><a href="/">Back to Dashboard</a></p>
   </div>
 </body>
+<%- include('partials/footer') %>
+
