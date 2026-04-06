@@ -1,0 +1,56 @@
+<%- include('partials/header') %>
+<body>
+  <div class="dash-container">
+    <%- include('partials/navbar') %>
+    <!-- Main Content -->
+    <main class="dash-main">
+      <header class="dash-header">
+        <div id="folder-title-container" class="folder-header-title">
+          <h1 id="folder-display-name">📁 <%= folder.name %></h1>
+          <button id="btn-edit-folder" class="btn-rename-small">
+            Rename Folder
+          </button>
+        </div>
+
+        <!-- Editable View -->
+        <form id="rename-folder-form" action="/folders/<%= folder.id %>/update" method="POST" class="hidden">
+          <input 
+            type="text" 
+            name="name" 
+            id="rename-folder-input" 
+            class="dash-input-title" 
+            value="<%= folder.name %>"
+            autocomplete="off"
+          >
+        </form>
+        <div class="dash-actions">
+          <!-- Pass the folderId so the upload knows where to save the file -->
+          <a href="/files/upload?folderId=<%= folder.id %>" class="dash-btn">Upload to this Folder</a>
+          <form action="/folders/<%= folder.id %>/delete" method="POST" onsubmit="return confirm('Delete this folder and all its files?')">
+            <button type="submit" class="dash-btn dash-btn-outline delete-btn">
+              Delete Folder
+            </button>
+          </form>
+        </div>
+      </header>
+
+      <h3 class="dash-section-title">Files in this Folder</h3>
+      <ul class="dash-list">
+        <% if (files.length > 0) { %>
+          <% files.forEach(file => { %>
+            <li class="dash-item">
+              <a href="/files/<%= file.id %>" class="dash-item-link">
+                <span class="icon">📄</span> <%= file.name %>
+                <span class="file-meta"><%= file.size %>kb</span>
+              </a>
+            </li>
+          <% }) %>
+        <% } else { %>
+          <p>This folder is empty.</p>
+        <% } %>
+      </ul>
+    </main>
+  </div>
+  <script src="/js/dashboard.js"></script>
+<%- include('partials/footer') %>
+

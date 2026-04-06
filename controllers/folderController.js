@@ -31,4 +31,49 @@ async function createFolderPost(req, res, next) {
   }
 }
 
-module.exports = { validateFolder, createFolderPost };
+async function folderDetailGet(req, res, next) {
+  try {
+    const folder = await db.getFolderById(req.params.id, req.user.id);
+
+    if (!folder) {
+      return res.status(404).send("Folder not found");
+    }
+
+    res.render("folder-detail", { 
+      title: folder.name, 
+      folder: folder,
+      files: folder.files 
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function updateFolderPost(req, res, next) {
+  try {
+    const { name } = req.body;
+    if (!name || name.trim() === "") return res.redirect(`/folders/${req.params.id}`);
+    
+    await db.updateFolder(req.params.id, req.user.id, name);
+    res.redirect(`/folders/${req.params.id}`);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function folderDeletePost(req, res, next) {
+  try {
+    await db.deleteFolder(req.params.id, req.user.id);
+    res.redirect("/"); // Send them back to the dashboard after deletion
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { 
+  validateFolder, 
+  createFolderPost,
+  folderDetailGet,
+  updateFolderPost,
+  folderDeletePost
+ };
