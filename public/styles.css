@@ -139,6 +139,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
+  cursor: pointer;
   transition: transform 0.1s, box-shadow 0.1s;
 }
 
@@ -155,6 +156,13 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 0.75rem;
   width: 100%;
+  white-space: nowrap;      /* Stops text from wrapping to a second line */
+  overflow: hidden;         /* Hides the text that overflows the container */
+  text-overflow: ellipsis;  /* Adds the '...' at the end */
+  
+  /* Required for flex children to truncate properly */
+  min-width: 0;             
+  flex: 1;
 }
 
 .dash-item form {
@@ -339,6 +347,22 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 2px solid #3b82f6;
   width: 100%;
   padding-bottom: 0.25rem;
+}
+
+/* FILE CLASSES */
+.file-name-text {
+  flex: 1;                  /* Takes up all available middle space */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.file-meta {
+  flex-shrink: 0;           /* Ensures the size (12kb) NEVER gets squished */
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-left: auto;
 }
 
 /* Errors */

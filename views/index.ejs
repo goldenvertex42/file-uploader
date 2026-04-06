@@ -43,8 +43,9 @@
             <% files.forEach(file => { %>
               <li class="dash-item">
                 <a href="/files/<%= file.id %>" class="dash-item-link">
-                  <span class="icon">📄</span> <%= file.name %>
-                  <span class="file-meta"><%= file.size %>kb</span>
+                  <span class="icon">📄</span> 
+                  <span class="file-name-text"><%= file.name %></span>
+                  <span class="file-meta"><%= (file.size / 1024).toFixed(1) %> KB</span>
                 </a>
               </li>
             <% }) %>
