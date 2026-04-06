@@ -102,10 +102,18 @@ h1, h2, h3, h4, h5, h6 {
 .dash-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start; /* Keeps buttons and title aligned at the top */
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #e2e8f0;
+  min-height: 80px; /* Give the header a consistent height to prevent "jumping" */
+}
+
+.dash-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 /* File/Folder Lists */
@@ -188,12 +196,35 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #2563eb;
   color: white;
   cursor: pointer;
+  white-space: nowrap;      /* Prevents 'Upload File' from becoming two lines */
+  flex-shrink: 0;
+}
+
+.dash-btn:hover {
+  background-color: #1d4ed8;
 }
 
 .dash-btn-outline {
   background: transparent;
   border: 1px solid #cbd5e1;
   color: #475569;
+  transition: all 0.3s ease;
+}
+
+.dash-btn-outline:hover {
+  color: #000000;
+  background-color: #f0f0f0;
+}
+
+.delete-btn {
+  color: #ef4444; 
+  border-color: #fca5a5;
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  color: #FFFFFF;
+  background-color: #fca5a5;
 }
 
 /* AUTH CLASSES */
@@ -264,6 +295,50 @@ h1, h2, h3, h4, h5, h6 {
 
 .auth-btn:hover {
   background-color: #1d4ed8;
+}
+
+/* FOLDER HEADER SPECIFICS */
+.folder-header-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  flex-grow: 1;
+}
+
+#rename-folder-form {
+  flex-grow: 1;
+  max-width: 600px;
+  margin-right: 2rem; /* Keeps space between the input and the action buttons */
+}
+
+.btn-rename-small {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.50rem;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-rename-small:hover {
+  background-color: #f1f5f9;
+  color: #2563eb;
+  border-color: #cbd5e1;
+}
+
+.dash-input-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #1e293b;
+  border: none;
+  background: transparent;
+  outline: none;
+  border-bottom: 2px solid #3b82f6;
+  width: 100%;
+  padding-bottom: 0.25rem;
 }
 
 /* Errors */
