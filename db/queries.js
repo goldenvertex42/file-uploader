@@ -57,16 +57,16 @@ async function deleteFolder(folderId, userId) {
   });
 }
 
-async function createFile({ name, size, url, userId, folderId }) {
+async function createFile(fileData) {
   return await prisma.file.create({
     data: {
-      name,
-      size,
-      url,
-      userId: Number(userId),
-      // If folderId exists, convert to Number; otherwise, set to null
-      folderId: folderId ? Number(folderId) : null,
-    },
+      name: fileData.name,
+      size: fileData.size,
+      url: fileData.url,       // Must be a string value
+      publicId: fileData.publicId,
+      userId: fileData.userId,
+      folderId: fileData.folderId
+    }
   });
 }
 
@@ -82,6 +82,15 @@ async function getUserRootFiles(userId) {
 
 async function getFileById(fileId, userId) {
   return await prisma.file.findUnique({
+    where: { 
+      id: Number(fileId),
+      userId: userId 
+    }
+  });
+}
+
+async function deleteFile(fileId, userId) {
+  return await prisma.file.delete({
     where: { 
       id: Number(fileId),
       userId: userId 
@@ -111,6 +120,7 @@ module.exports = {
   createFile,
   getUserRootFiles,
   getFileById,
+  deleteFile,
   getUserByEmail,
   getUserById
 }
