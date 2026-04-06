@@ -3,19 +3,33 @@
   <%- include('partials/navbar') %>
   
   <main class="dash-main">
-    <div class="auth-card">
-      <h1 class="auth-title">📄 File Details</h1>
+    <div class="auth-card file-card">
+      <header class="file-card-header">
+        <span class="file-emoji">📄</span>
+        <h1 class="file-card-name"><%= file.name %></h1>
+      </header>
       
-      <div class="file-info">
-        <p><strong>Name:</strong> <%= file.name %></p>
-        <p><strong>Size:</strong> <%= (file.size / 1024).toFixed(2) %> KB</p>
-        <p><strong>Uploaded:</strong> <%= file.createdAt.toLocaleString() %></p>
+      <div class="file-info-grid">
+        <span class="info-label">Size</span>
+        <span class="info-value"><%= (file.size / 1024).toFixed(2) %> KB</span>
+
+        <span class="info-label">Type</span>
+        <span class="info-value"><%= file.name.split('.').pop().toUpperCase() %> File</span>
+
+        <span class="info-label">Uploaded</span>
+        <span class="info-value"><%= file.createdAt.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }) %></span>
       </div>
 
-      <div class="dash-actions" style="margin-top: 2rem;">
-        <!-- Download Button -->
-        <a href="/files/<%= file.id %>/download" class="dash-btn">Download File</a>
-        <a href="/" class="dash-btn dash-btn-outline">Back</a>
+      <div class="dash-actions">
+        <% const downloadUrl = file.url.replace('/upload/', '/upload/fl_attachment/') %>
+        <a href="<%= downloadUrl %>" class="dash-btn">Download File</a>
+        
+        <!-- Delete File Form -->
+        <form action="/files/<%= file.id %>/delete" method="POST" onsubmit="return confirm('Permanently delete this file?')">
+          <button type="submit" class="dash-btn dash-btn-outline delete-btn">Delete</button>
+        </form>
+        
+        <a href="/folders/<%= file.folderId %>" class="dash-btn dash-btn-outline right-side">Back</a>
       </div>
     </div>
   </main>
