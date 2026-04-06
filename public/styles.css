@@ -134,13 +134,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .dash-item {
   background: white;
-  padding: 1rem;
+  padding: 0;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
   cursor: pointer;
   transition: transform 0.1s, box-shadow 0.1s;
+  overflow: hidden;
 }
 
 .dash-item:hover {
@@ -155,7 +156,9 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  padding: 1rem;
   width: 100%;
+  height: 100%;
   white-space: nowrap;      /* Stops text from wrapping to a second line */
   overflow: hidden;         /* Hides the text that overflows the container */
   text-overflow: ellipsis;  /* Adds the '...' at the end */
@@ -166,6 +169,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .dash-item form {
+  padding: 1rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -187,7 +191,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Icons/Badges */
-.icon { font-size: 1.25rem; }
+.icon { 
+  font-size: 1.25rem;
+}
+
 .file-meta {
   font-size: 0.75rem;
   color: #94a3b8;
@@ -350,6 +357,51 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* FILE CLASSES */
+.file-card {
+  max-width: 600px;
+}
+
+.file-card-header {
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.file-emoji {
+  font-size: 2rem;
+}
+
+.file-card-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  word-break: break-all; /* Ensures long names don't break the card */
+}
+
+.file-info-grid {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.info-label {
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.info-value {
+  color: #1e293b;
+  font-size: 0.95rem;
+}
+
 .file-name-text {
   flex: 1;                  /* Takes up all available middle space */
   white-space: nowrap;
@@ -362,6 +414,10 @@ h1, h2, h3, h4, h5, h6 {
   flex-shrink: 0;           /* Ensures the size (12kb) NEVER gets squished */
   font-size: 0.75rem;
   color: #94a3b8;
+  margin-left: auto;
+}
+
+.right-side {
   margin-left: auto;
 }
 
