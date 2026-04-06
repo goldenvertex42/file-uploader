@@ -32,6 +32,7 @@ model File {
   id        Int      @id @default(autoincrement())
   name      String
   url       String
+  publicId  String
   size      Int
   createdAt DateTime @default(now())
   userId    Int
