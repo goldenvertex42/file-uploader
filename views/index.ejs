@@ -2,15 +2,7 @@
 <body>
   <% if (locals.currentUser) { %>
     <div class="dash-container">
-      <!-- Sidebar -->
-      <aside class="dash-sidebar">
-        <div class="dash-logo">Deep Thought Vault</div>
-        <nav class="nav-box">
-          <a href="/" class="dash-nav-link">🏠 Dashboard</a>
-          <a href="/logout" class="dash-nav-link">🚪 Logout</a>
-        </nav>
-      </aside>
-
+      <%- include('partials/navbar') %>
       <!-- Main Content -->
       <main class="dash-main">
         <header class="dash-header">
@@ -21,7 +13,7 @@
           </div>
         </header>
 
-        <h3 class="dash-section-title">Folders</h3>
+        <h3 class="dash-section-title">My Folders</h3>
         <ul class="dash-list">
           <li id="new-folder-item" class="dash-item hidden">
             <form action="/folders/new" method="POST">
@@ -45,16 +37,20 @@
           <% }) %>
         </ul>
 
-        <h3 class="dash-section-title">Recent Files</h3>
+        <h3 class="dash-section-title">My Files</h3>
         <ul class="dash-list">
-          <% files.forEach(file => { %>
-            <li class="dash-item">
-              <a href="/files/<%= file.id %>" class="dash-item-link">
-                <span class="icon">📄</span> <%= file.name %>
-                <span class="file-meta"><%= file.size %>kb</span>
-              </a>
-            </li>
-          <% }) %>
+          <% if (files.length > 0) { %>
+            <% files.forEach(file => { %>
+              <li class="dash-item">
+                <a href="/files/<%= file.id %>" class="dash-item-link">
+                  <span class="icon">📄</span> <%= file.name %>
+                  <span class="file-meta"><%= file.size %>kb</span>
+                </a>
+              </li>
+            <% }) %>
+          <% } else { %>
+            <p>There are no files in the root directory.</p>
+          <% } %>
         </ul>
       </main>
     </div>
