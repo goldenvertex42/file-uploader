@@ -28,13 +28,17 @@
               >
             </form>
           </li>
-          <% folders.forEach(folder => { %>
-            <li class="dash-item">
-              <a href="/folders/<%= folder.id %>" class="dash-item-link">
-                <span class="icon">📁</span> <%= folder.name %>
-              </a>
-            </li>
-          <% }) %>
+          <% if (folders.length > 0) { %>
+            <% folders.forEach(folder => { %>
+              <li class="dash-item">
+                <a href="/folders/<%= folder.id %>" class="dash-item-link">
+                  <span class="icon">📁</span> <%= folder.name %>
+                </a>
+              </li>
+            <% }) %>
+          <% } else { %>
+            <p>There are no folders to display.</p>
+          <% } %>
         </ul>
 
         <h3 class="dash-section-title">My Files</h3>
