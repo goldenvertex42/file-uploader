@@ -2,7 +2,13 @@
 <body class="auth-page">
   <div class="auth-card">
     <h1 class="auth-title">Upload File</h1>
-
+    <% if (locals.errors) { %>
+      <ul class="error-list">
+        <% errors.forEach(error => { %>
+          <li class="error-item"><%= error.msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
     <form action="/files/upload" method="POST" enctype="multipart/form-data">
       <label class="auth-label" for="file">Select File</label>
       <input class="auth-input" type="file" id="file" name="file" required>
@@ -26,6 +32,5 @@
 
     <p class="auth-footer"><a href="/">Back to Dashboard</a></p>
   </div>
-</body>
 <%- include('partials/footer') %>
 
