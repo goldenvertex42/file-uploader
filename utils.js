@@ -6,6 +6,13 @@ function formatSize(bytes) {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 
+function buildShareUrl(req, folderId) {
+  const protocol = req.protocol;
+  const host = req.get('host');
+  return `${protocol}://${host}/folders/share/${folderId}`;
+}
+
 module.exports = {
-  formatSize
+  formatSize,
+  buildShareUrl
 }
