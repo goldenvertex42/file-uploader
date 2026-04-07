@@ -7,6 +7,10 @@
       <header class="dash-header">
         <div id="folder-title-container" class="folder-header-title">
           <h1 id="folder-display-name">📁 <%= folder.name %></h1>
+          <p class="file-meta folder-size">
+            Total Size: <%= formatSize(folder.totalSize) %> 
+            (<%= folder.files.length %> files)
+          </p>
           <button id="btn-edit-folder" class="btn-rename-small">
             Rename Folder
           </button>
