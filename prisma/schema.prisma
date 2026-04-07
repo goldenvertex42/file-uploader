@@ -13,38 +13,40 @@ datasource db {
 }
 
 model Session {
-  id        String   @id @default(cuid())
-  sid       String   @unique
-  data      String   @db.Text
-  expiresAt DateTime
+  id            String   @id @default(cuid())
+  sid           String   @unique
+  data          String   @db.Text
+  expiresAt     DateTime
 }
 
 model User { 
-  id        Int     @id @default(autoincrement()) 
-  email     String  @unique
-  name      String
-  password  String
-  folders   Folder[]
-  files     File[]
+  id            Int     @id @default(autoincrement()) 
+  email         String  @unique
+  name          String
+  password      String
+  folders       Folder[]
+  files         File[]
 }
 
 model File {
-  id        Int      @id @default(autoincrement())
-  name      String
-  url       String
-  publicId  String
-  size      Int
-  createdAt DateTime @default(now())
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  folderId  Int?
-  folder    Folder?  @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  id            Int      @id @default(autoincrement())
+  name          String
+  url           String
+  publicId      String
+  size          Int
+  createdAt     DateTime @default(now())
+  userId        Int
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  folderId      Int?
+  folder        Folder?  @relation(fields: [folderId], references: [id], onDelete: Cascade)
 }
 
 model Folder {
-  id        Int      @id @default(autoincrement())
-  name      String
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  files     File[]   // Relation to the files inside this folder
+  id            Int      @id @default(autoincrement())
+  name          String
+  userId        Int
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  files         File[]   // Relation to the files inside this folder
+  isShared      Boolean   @default(false)
+  shareExpires  DateTime?
 }
