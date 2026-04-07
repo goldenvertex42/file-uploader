@@ -55,6 +55,52 @@ async function getFolderById(folderId, userId) {
   };
 }
 
+async function toggleFolderShare(folderId, userId, expiresAt) {
+  return await prisma.folder.update({
+    where: { id: Number(folderId), userId },
+    data: {
+      isShared: true,
+      shareExpires: expiresAt
+    }
+  });
+}
+
+async function revokeFolderShare(folderId, userId) {
+  return await prisma.folder.update({
+    where: { id: Number(folderId), userId },
+    data: {
+      isShared: false,
+      shareExpires: null
+    }
+  });
+}
+
+async function getSharedFolder(folderId) {
+  const folder = await prisma.folder.findUnique({
+    where: { id: Number(folderId) },
+    include: { 
+      files: true,
+      _count: {
+        select: { files: true } // Gets the number of files automatically
+      }
+    }
+  });
+
+  if (!folder || !folder.isShared || (folder.shareExpires && folder.shareExpires < new Date())) {
+    return null; // Link is invalid or expired
+  }
+
+  const aggregation = await prisma.file.aggregate({
+    where: { folderId: Number(folderId) },
+    _sum: { size: true }
+  });
+
+  return {
+    ...folder,
+    totalSize: aggregation._sum.size || 0
+  };
+}
+
 async function updateFolder(folderId, userId, newName) {
   return await prisma.folder.update({
     where: { 
@@ -142,6 +188,9 @@ module.exports = {
   createFolder,
   getUserFolders,
   getFolderById,
+  toggleFolderShare,
+  revokeFolderShare,
+  getSharedFolder,
   updateFolder,
   deleteFolder,
   createFile,

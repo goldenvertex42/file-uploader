@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+<div class="public-view-container">
+  <main class="public-main">
+    <header class="public-header">
+      <div class="folder-info">
+        <h1>📁 <%= folder.name %></h1>
+        <p class="file-meta folder-size">
+          Shared with you • <%= folder.files.length %> files 
+          (<%= formatSize(folder.totalSize) %>)
+        </p>
+        <% if (files.length > 0 && zipDownloadUrl) { %>
+          <a href="<%= zipDownloadUrl %>" class="dash-btn">
+            📦 Download Everything (.zip)
+          </a>
+        <% } %>
+      </div>
+    </header>
+
+    <div class="public-content">
+      <h3 class="dash-section-title">Files available for download</h3>
+      <ul class="dash-list public-files">
+        <% if (files.length > 0) { %>
+          <% files.forEach(file => { %>
+            <li class="dash-item public-item">
+              <div class="file-info">
+                <span class="icon">📄</span> 
+                <span class="file-name"><%= file.name %></span>
+                <span class="file-meta"><%= formatSize(file.size) %></span>
+              </div>
+              
+              <% const downloadUrl = file.url.replace('/upload/', '/upload/fl_attachment/') %>
+              <a href="<%= downloadUrl %>" class="dash-btn">Download File</a>
+            </li>
+          <% }) %>
+        <% } else { %>
+          <p class="empty-msg">This shared folder is empty.</p>
+        <% } %>
+      </ul>
+    </div>
+  </main>
+</div>
+<%- include('partials/footer') %>

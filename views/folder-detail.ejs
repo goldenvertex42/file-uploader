@@ -14,6 +14,11 @@
           <button id="btn-edit-folder" class="btn-rename-small">
             Rename Folder
           </button>
+          <% if (files.length > 0 && zipDownloadUrl) { %>
+            <a href="<%= zipDownloadUrl %>" class="dash-btn">
+              📦 Download Everything (.zip)
+            </a>
+          <% } %>
         </div>
 
         <!-- Editable View -->
@@ -27,6 +32,7 @@
             autocomplete="off"
           >
         </form>
+
         <div class="dash-actions">
           <!-- Pass the folderId so the upload knows where to save the file -->
           <a href="/files/upload?folderId=<%= folder.id %>" class="dash-btn">Upload to this Folder</a>
@@ -37,6 +43,59 @@
           </form>
         </div>
       </header>
+
+      <section class="share-management-card">
+        <div class="share-header">
+          <h3>🔗 Folder Sharing</h3>
+        </div>
+
+        <% if (folder.isShared) { %>
+          <!-- VIEW: When folder IS currently shared -->
+          <div class="share-status-active">
+            <p class="share-status-label">✅ This folder is currently public</p>
+            
+            <div class="share-link-container">
+              <input 
+                type="text" 
+                id="share-url-input" 
+                value="<%= shareUrl %>" 
+                readonly 
+                class="share-url-field"
+              >
+              <button onclick="copyShareLink()" class="btn-copy">Copy Link</button>
+            </div>
+
+            <% if (folder.shareExpires) { %>
+              <p class="share-expiry-text">
+                Expires on: <%= new Date(folder.shareExpires).toLocaleString() %>
+              </p>
+            <% } else { %>
+              <p class="share-expiry-text">This link does not expire.</p>
+            <% } %>
+
+            <form action="/folders/<%= folder.id %>/revoke" method="POST" class="revoke-form">
+              <button type="submit" class="btn-revoke-link">Disable Share Link</button>
+            </form>
+          </div>
+
+        <% } else { %>
+          <!-- VIEW: When folder is NOT shared -->
+          <form action="/folders/<%= folder.id %>/share" method="POST" class="share-setup-form">
+            <div class="share-options">
+              <label for="expiresIn">Link duration:</label>
+              <select name="expiresIn" id="expiresIn" class="share-select">
+                <option value="1">1 Day</option>
+                <option value="7">7 Days</option>
+                <option value="30">30 Days</option>
+                <option value="0">Permanent (No expiry)</option>
+              </select>
+              <button type="submit" class="dash-btn">Create Share Link</button>
+            </div>
+          </form>
+        <% } %>
+      </section>
+
+      <hr class="section-divider">
 
       <h3 class="dash-section-title">Files in this Folder</h3>
       <ul class="dash-list">
