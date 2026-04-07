@@ -84,3 +84,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+function copyShareLink() {
+  const copyText = document.getElementById("share-url-input");
+  
+  if (copyText) {
+    // Select the text field
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText.value)
+      .then(() => {
+        // Visual feedback (optional)
+        const copyBtn = document.querySelector('.btn-copy');
+        const originalText = copyBtn.innerText;
+        copyBtn.innerText = "Copied!";
+        copyBtn.style.backgroundColor = "#10b981"; // Change to success green
+        
+        setTimeout(() => {
+          copyBtn.innerText = originalText;
+          copyBtn.style.backgroundColor = ""; // Reset to CSS original
+        }, 2000);
+      })
+      .catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+  }
+}
