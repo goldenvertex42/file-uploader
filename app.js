@@ -11,6 +11,7 @@ const db = require('./db/queries');
 const authRouter = require("./routes/authRouter.js");
 const fileRouter = require("./routes/fileRouter.js");
 const folderRouter = require("./routes/folderRouter.js");
+const { formatSize } = require("./utils.js");
 
 
 
@@ -74,8 +75,10 @@ passport.deserializeUser(async (id, done) => {
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.formatSize = formatSize; // Now available in all .ejs files!
   next();
 });
+
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path}`);
   next();
