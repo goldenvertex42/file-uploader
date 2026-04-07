@@ -40,6 +40,18 @@ async function fileDetailGet(req, res, next) {
   }
 }
 
+async function updateFilePost(req, res, next) {
+  try {
+    const { name } = req.body;
+    if (!name || name.trim() === "") return res.redirect(`/files/${req.params.id}`);
+    
+    await db.updateFile(req.params.id, req.user.id, name);
+    res.redirect(`/files/${req.params.id}`);
+  } catch (err) {
+    next(err);
+  }
+}
+
 async function fileDeletePost(req, res, next) {
   try {
     const file = await db.getFileById(req.params.id, req.user.id);
@@ -55,5 +67,6 @@ module.exports = {
   uploadGet,
   uploadPost,
   fileDetailGet,
+  updateFilePost,
   fileDeletePost
 }

@@ -27,15 +27,32 @@ async function getUserFolders(userId) {
 }
 
 async function getFolderById(folderId, userId) {
-  return await prisma.folder.findUnique({
+  const folder = await prisma.folder.findUnique({
     where: { 
       id: Number(folderId),
-      userId: userId
+      userId: userId 
     },
     include: {
-      files: true
+      files: true,
+      _count: {
+        select: { files: true } // Gets the number of files automatically
+      }
     }
   });
+
+  if (!folder) return null;
+
+  // Add the sum aggregation
+  const aggregation = await prisma.file.aggregate({
+    where: { folderId: Number(folderId) },
+    _sum: { size: true }
+  });
+
+  // Combine them into one object
+  return {
+    ...folder,
+    totalSize: aggregation._sum.size || 0
+  };
 }
 
 async function updateFolder(folderId, userId, newName) {
@@ -89,6 +106,16 @@ async function getFileById(fileId, userId) {
   });
 }
 
+async function updateFile(fileId, userId, newName) {
+  return await prisma.file.update({
+    where: { 
+      id: Number(fileId),
+      userId: userId 
+    },
+    data: { name: newName }
+  });
+}
+
 async function deleteFile(fileId, userId) {
   return await prisma.file.delete({
     where: { 
@@ -120,6 +147,7 @@ module.exports = {
   createFile,
   getUserRootFiles,
   getFileById,
+  updateFile,
   deleteFile,
   getUserByEmail,
   getUserById

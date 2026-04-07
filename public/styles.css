@@ -195,12 +195,6 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.25rem;
 }
 
-.file-meta {
-  font-size: 0.75rem;
-  color: #94a3b8;
-  margin-left: auto;
-}
-
 /* Reusing Button Style but with a dash prefix for consistency */
 .dash-btn {
   padding: 0.6rem 1rem;
@@ -415,6 +409,10 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.75rem;
   color: #94a3b8;
   margin-left: auto;
+}
+
+.folder-size {
+  margin-left: 0;
 }
 
 .right-side {

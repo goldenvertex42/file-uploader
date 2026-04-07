@@ -3,10 +3,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const folderFormItem = document.querySelector('#new-folder-item');
   const folderInput = document.querySelector('#new-folder-input');
 
-  const editBtn = document.querySelector('#btn-edit-folder');
-  const titleContainer = document.querySelector('#folder-title-container');
-  const renameForm = document.querySelector('#rename-folder-form');
-  const renameInput = document.querySelector('#rename-folder-input');
+  const editFolderBtn = document.querySelector('#btn-edit-folder');
+  const titleFolderContainer = document.querySelector('#folder-title-container');
+  const renameFolderForm = document.querySelector('#rename-folder-form');
+  const renameFolderInput = document.querySelector('#rename-folder-input');
+
+  const editFileBtn = document.querySelector('#btn-edit-file');
+  const fileTitleContainer = document.querySelector('#file-title-container');
+  const renameFileForm = document.querySelector('#rename-file-form');
+  const renameFileInput = document.querySelector('#rename-file-input');
 
   if (newFolderBtn && folderFormItem && folderInput) {
     newFolderBtn.addEventListener('click', () => {
@@ -32,25 +37,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (editBtn && titleContainer && renameForm && renameInput) {
-    editBtn.addEventListener('click', () => {
-      titleContainer.classList.add('hidden');
-      renameForm.classList.remove('hidden');
-      renameInput.focus();
-      renameInput.select();
+  if (editFolderBtn && titleFolderContainer && renameFolderForm && renameFolderInput) {
+    editFolderBtn.addEventListener('click', () => {
+      titleFolderContainer.classList.add('hidden');
+      renameFolderForm.classList.remove('hidden');
+      renameFolderInput.focus();
+      renameFolderInput.select();
     });
 
-    renameInput.addEventListener('keydown', (e) => {
+    renameFolderInput.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        renameForm.classList.add('hidden');
-        titleContainer.classList.remove('hidden');
+        renameFolderForm.classList.add('hidden');
+        titleFolderContainer.classList.remove('hidden');
       }
     });
 
     document.addEventListener('click', (e) => {
-      if (!renameForm.contains(e.target) && e.target !== editBtn) {
-        renameForm.classList.add('hidden');
-        titleContainer.classList.remove('hidden');
+      if (!renameFolderForm.contains(e.target) && e.target !== editFolderBtn) {
+        renameFolderForm.classList.add('hidden');
+        titleFolderContainer.classList.remove('hidden');
+      }
+    });
+  }
+
+
+  if (editFileBtn && fileTitleContainer && renameFileForm && renameFileInput) {
+    editFileBtn.addEventListener('click', () => {
+      fileTitleContainer.classList.add('hidden');
+      renameFileForm.classList.remove('hidden');
+      renameFileInput.focus();
+      renameFileInput.select();
+    });
+
+    renameFileInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        renameFileForm.classList.add('hidden');
+        fileTitleContainer.classList.remove('hidden');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!renameFileForm.contains(e.target) && e.target !== editFileBtn) {
+        renameFileForm.classList.add('hidden');
+        fileTitleContainer.classList.remove('hidden');
       }
     });
   }

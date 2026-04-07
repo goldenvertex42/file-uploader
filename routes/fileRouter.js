@@ -48,6 +48,7 @@ fileRouter.post("/upload", isAuth, (req, res, next) => {
 }, fileController.uploadPost);
 
 fileRouter.get("/:id", isAuth, fileController.fileDetailGet);
+fileRouter.post("/:id/update", isAuth, fileController.updateFilePost);
 fileRouter.post("/:id/delete", isAuth, fileController.fileDeletePost);
 
 module.exports = fileRouter;

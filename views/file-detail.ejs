@@ -5,8 +5,22 @@
   <main class="dash-main">
     <div class="auth-card file-card">
       <header class="file-card-header">
-        <span class="file-emoji">📄</span>
-        <h1 class="file-card-name"><%= file.name %></h1>
+        <div id="file-title-container" class="folder-header-title">
+          <h1 class="file-card-name">📄 <%= file.name %></h1>
+          <button id="btn-edit-file" class="btn-rename-small">Rename File</button>
+        </div>
+
+        <!-- Hidden Rename Form -->
+        <form id="rename-file-form" action="/files/<%= file.id %>/update" method="POST" class="hidden">
+          <input 
+            type="text" 
+            name="name" 
+            id="rename-file-input" 
+            class="dash-input-title" 
+            value="<%= file.name %>"
+            autocomplete="off"
+          >
+        </form>
       </header>
       
       <div class="file-info-grid">
@@ -34,4 +48,5 @@
     </div>
   </main>
 </div>
+<script src="/js/dashboard.js"></script>
 <%- include('partials/footer') %>
