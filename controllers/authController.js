@@ -32,7 +32,11 @@ async function indexGet(req, res, next) {
   try {
     // If not logged in, render the landing page state
     if (!req.isAuthenticated()) {
-      return res.render("index", { folders: [], files: [] });
+      return res.render("index", { 
+        title: "Sign Up Now!",
+        folders: [], 
+        files: [] 
+      });
     }
 
     // Fetch actual data for the logged-in user
@@ -40,7 +44,7 @@ async function indexGet(req, res, next) {
       db.getUserFolders(req.user.id),
       db.getUserRootFiles(req.user.id)
     ]);
-    console.log("Folders found for user:", folders); 
+    
     res.render("index", { 
       title: "Dashboard",
       folders, 
