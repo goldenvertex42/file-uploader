@@ -266,6 +266,7 @@ footer {
   align-items: center;
   min-height: 100vh;
   margin: 0;
+  gap: 3rem;
 }
 
 /* Form Container */
