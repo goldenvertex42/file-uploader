@@ -105,7 +105,7 @@
               <a href="/files/<%= file.id %>" class="dash-item-link">
                 <span class="icon">📄</span> 
                 <span class="file-name-text"><%= file.name %></span>
-                <span class="file-meta"><%= (file.size / 1024).toFixed(1) %> KB</span>
+                <span class="file-meta"><%= formatSize(file.size) %></span>
               </a>
             </li>
           <% }) %>

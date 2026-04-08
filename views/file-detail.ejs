@@ -25,7 +25,7 @@
       
       <div class="file-info-grid">
         <span class="info-label">Size</span>
-        <span class="info-value"><%= (file.size / 1024).toFixed(2) %> KB</span>
+        <span class="info-value"><%= formatSize(file.size) %></span>
 
         <span class="info-label">Type</span>
         <span class="info-value"><%= file.name.split('.').pop().toUpperCase() %> File</span>
